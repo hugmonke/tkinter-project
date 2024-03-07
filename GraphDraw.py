@@ -96,7 +96,7 @@ def okienko():
     napis4.place(x=20, y=150)
     napis5 = tk.Label(text="Title ")
     napis5.place(x=20, y=100)
-    napis6 = tk.Label(text="T-label ")
+    napis6 = tk.Label(text="Y-label ")
     napis6.place(x=20, y=125)
     napis7 = tk.Label(text="Available special functions: sin(x), cos(x), tan(x), cot(x), exp(x), log(x,b), sqrt(x) ")
     napis7.place(x=20, y=50)
