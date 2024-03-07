@@ -12,7 +12,7 @@ def sprawdz():
     """Checks if given intervals are numbers"""
     czek = [r1.get(), r2.get(), y1.get(), y2.get()]
     for i in range(0,4):
-        if czek[i].isdigit() == False:
+        if czek[i].lstrip('-').isdigit() == False:
             print("Intervals must be numbers!\n")
             break
         else:
