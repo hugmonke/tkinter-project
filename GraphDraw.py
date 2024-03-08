@@ -16,6 +16,7 @@ def sprawdz():
             print("Intervals must be numbers!\n")
             break
         else:
+            #ta funkcja robi wiecej niz tylko  """Checks if given intervals are numbers""", poprawic
             rysuj()
             break
 def rysuj():
@@ -34,6 +35,7 @@ def rysuj():
             if wzor[i][0] == 'l':
                 wzor[i] = 'm.' + wzor[i]
                 log = True
+            #tutaj wrzucic to do funkcji
             if j <= i and (wzor[i] == 's' or wzor[i][0] == 'c' or wzor[i][0] == 't' or wzor[i][0] == 'e' or wzor[i][0] == 'p'): #poszukuje funkcyj matematycznych
                 wzor[i] = 'm.' + wzor[i]
                 j = i+3
@@ -75,6 +77,9 @@ def czysc():
     plt.show()
 def input_przycisk(znak):
     input.insert(0,znak)
+
+
+    #wrzucic to do osobnego modulu
 def okienko():
     """Defines position and size of window and buttons"""
     input.place(x=200, y=250)
