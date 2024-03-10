@@ -1,86 +1,36 @@
-import tkinter as tk
-from tkinter import ttk
-import numpy as np
 import matplotlib.pyplot as plt
-import math as m
 import sys
+import tkinter as tk
+import functionals as moj
 
 okno = tk.Tk()
 okno.title("GraphDraw")
 okno.geometry("800x600")
-def sprawdz(): 
-    """Checks if given intervals are numbers"""
-    czek = [r1.get(), r2.get(), y1.get(), y2.get()]
-    for i in range(0,4):
-        if czek[i].lstrip('-').isdigit() == False:
-            print("Intervals must be numbers!\n")
-            break
-        else:
-            #ta funkcja robi wiecej niz tylko  """Checks if given intervals are numbers""", poprawic
-            rysuj()
-            break
-def rysuj():
-    """Reads formulas and draws graphs"""
-    plt.clf()
-    wejscie = input.get()
-    wejscie = wejscie.split(";") #Dzielimy wejście na listę list z odpowiednio podzielonymi wzorami
-    for k in range(0,len(wejscie)):
-        wzor = wejscie[k]
-        wzor = wzor.replace('^', '**')
-        wzor = list(wzor)
-        j = 0
-        log = 0
- 
-        for i in range(0,len(wzor)): #Dodaje przedroski m. (math.) by eval() automatycznie wykrywal funkcje
-            if wzor[i][0] == 'l':
-                wzor[i] = 'm.' + wzor[i]
-                log = True
-            #tutaj wrzucic to do funkcji
-            if j <= i and (wzor[i] == 's' or wzor[i][0] == 'c' or wzor[i][0] == 't' or wzor[i][0] == 'e' or wzor[i][0] == 'p'): #poszukuje funkcyj matematycznych
-                wzor[i] = 'm.' + wzor[i]
-                j = i+3
-         
-        wzor = ''.join(wzor)
-        dziala = False
-        while (dziala == False):                                       #Sprawdzamy, czy podany zakres zgadza się z dziedziną funkcji
-            rangeX1 = float(r1.get())
-            rangeX2 = float(r2.get())
-            rangeY1 = float(y1.get())
-            rangeY2 = float(y2.get())
-            if ((rangeX1 >= rangeX2) or (log == True and rangeX1 <= 0)):   #Jeśli nie, podaj poprawny zakres
-                print("Bad range!\n")
-                okienko()
-            else:
-                args = [*np.arange(rangeX1, rangeX2, 0.01)]               #Jeśli tak, to rysuj wykres
-                try: 
-                    [eval(wzor) for x in args]                              #Sprawdza, czy wpisany przez nas tekst jest funkcją matematyczną
-                except:
-                    raise ValueError("Not a math function!\n")
-                func = [eval(wzor) for x in args]
-                dziala = True
-                plt.plot(args, func, label = str(wejscie[k]))
-                plt.legend(loc="upper left")
-                plt.ylim(rangeY1,rangeY2)
-                plt.title(name2.get())
-                plt.xlabel(name1.get())
-                plt.ylabel(name3.get())
-    plt.show()
 
-        
-            
+input = tk.Entry(okno, width=40) 
+r1 = tk.Entry(okno, width=10) #X1 interval
+r1.insert(0, 1)
+r2 = tk.Entry(okno, width=10) #X2 interval
+r2.insert(0, 10)
+y1 = tk.Entry(okno, width=10) #Y1 interval
+y1.insert(0, -10)
+y2 = tk.Entry(okno, width=10) #Y2 interval   
+y2.insert(0, 10)    
+name1 = tk.Entry(okno, width=10) #graph title
+name1.insert(0, "Graph")
+name2 = tk.Entry(okno, width=10) #OX label
+name2.insert(0, "X Axis")
+name3 = tk.Entry(okno, width=10) #OY label
+name3.insert(0, 'Y Axis')
+
 def wylacz():
     """Shuts down the program"""
     sys.exit(0)
-def czysc():
-    """Clears the graph"""
-    plt.clf()
-    plt.show()
+    
 def input_przycisk(znak):
     input.insert(0,znak)
 
-
-    #wrzucic to do osobnego modulu
-def okienko():
+def okienko(input, r1, r2, y1, y2, name1, name2, name3):
     """Defines position and size of window and buttons"""
     input.place(x=200, y=250)
     r1.place(x=530, y=100)
@@ -90,7 +40,7 @@ def okienko():
     name1.place(x=200, y=150)
     name2.place(x=200, y=100) 
     name3.place(x=200, y=125)
-    #############################################
+    #
     napis1 = tk.Label(text="Left limit: ")
     napis1.place(x=350, y=100)
     napis2 = tk.Label(text="Right limit: ")
@@ -103,19 +53,17 @@ def okienko():
     napis5.place(x=20, y=100)
     napis6 = tk.Label(text="Y-label ")
     napis6.place(x=20, y=125)
-    napis7 = tk.Label(text="Available special functions: sin(x), cos(x), tan(x), cot(x), exp(x), log(x,b), sqrt(x) ")
+    napis7 = tk.Label(text="Available special functions: sin(x), cos(x), tan(x), exp(x), log(x)")
     napis7.place(x=20, y=50)
     napis8 = tk.Label(text="Lower limit ")
     napis8.place(x=350, y=150)
     napis9 = tk.Label(text="Upper limit ")
     napis9.place(x=350, y=175)
-    #############################################
-    przycisk1 = tk.Button(okno, text="Draw graph", command = lambda: sprawdz())
+    #
+    przycisk1 = tk.Button(okno, text="Draw graph", command = lambda: moj.ReadAndDraw(input.get(), r1.get(), r2.get(), y1.get(), y2.get(), name1.get(), name2.get(), name3.get()))
     przycisk1.place(x = 550, y = 250)
     przycisk2 = tk.Button(okno, text="Exit", command = wylacz)
     przycisk2.place(x = 550, y = 300)
-    przycisk3 = tk.Button(okno, text="Clear", command = czysc)
-    przycisk3.place(x = 550, y = 350)
     cyfra1 = tk.Button(okno, text="1", command=lambda: input_przycisk(1))
     cyfra1.place(x = 200, y = 300)
     cyfra2 = tk.Button(okno, text="2", command=lambda: input_przycisk(2))
@@ -142,8 +90,8 @@ def okienko():
     cosinus.place(x = 260, y = 330)
     tg = tk.Button(okno, text="tan(x)", width=4,height=1, command=lambda: input_przycisk("tan(x)"))
     tg.place(x = 300, y = 300)
-    ctg = tk.Button(okno, text="cot(x)", width=4,height=1, command=lambda: input_przycisk("cot(x)"))
-    ctg.place(x = 300, y = 330)
+    log = tk.Button(okno, text="log(x)", width=4,height=1, command=lambda: input_przycisk("log(x)"))
+    log.place(x = 300, y = 330)
     liczb_pi = tk.Button(okno, text="\u03C0", width=1,height=1, command=lambda: input_przycisk("pi"))
     liczb_pi.place(x = 200, y = 390)
     liczb_e = tk.Button(okno, text="e", width=1,height=1, command=lambda: input_przycisk("e"))
@@ -158,13 +106,4 @@ def okienko():
     dziel.place(x = 320, y = 360)
     okno.mainloop()
 
-
-input = tk.Entry(okno, width=40) #wejscie funkcyj
-r1 = tk.Entry(okno, width=10) #zakresX1
-r2 = tk.Entry(okno, width=10) #zakresX2
-y1 = tk.Entry(okno, width=10) #zakresY1
-y2 = tk.Entry(okno, width=10) #zakresY2        
-name1 = tk.Entry(okno, width=10) #nazwa wykresu
-name2 = tk.Entry(okno, width=10) #nazwa osi OX
-name3 = tk.Entry(okno, width=10) #nazwa osi OY
-okienko()
+okienko(input, r1, r2, y1, y2, name1, name2, name3)
