@@ -3,25 +3,27 @@ import sys
 import tkinter as tk
 import functionals as moj
 
-okno = tk.Tk()
-okno.title("GraphDraw")
-okno.geometry("800x600")
 
-input = tk.Entry(okno, width=40) 
-r1 = tk.Entry(okno, width=10) #X1 interval
-r1.insert(0, 1)
-r2 = tk.Entry(okno, width=10) #X2 interval
-r2.insert(0, 10)
-y1 = tk.Entry(okno, width=10) #Y1 interval
-y1.insert(0, -10)
-y2 = tk.Entry(okno, width=10) #Y2 interval   
-y2.insert(0, 10)    
-name1 = tk.Entry(okno, width=10) #graph title
-name1.insert(0, "Graph")
-name2 = tk.Entry(okno, width=10) #OX label
-name2.insert(0, "X Axis")
-name3 = tk.Entry(okno, width=10) #OY label
-name3.insert(0, 'Y Axis')
+if __name__ == '__main__':
+    okno = tk.Tk()
+    okno.title("GraphDraw")
+    okno.geometry("800x600")
+    
+    input = tk.Entry(okno, width=40) 
+    r1 = tk.Entry(okno, width=10) #X1 interval
+    r1.insert(0, 1)
+    r2 = tk.Entry(okno, width=10) #X2 interval
+    r2.insert(0, 10)
+    y1 = tk.Entry(okno, width=10) #Y1 interval
+    y1.insert(0, -10)
+    y2 = tk.Entry(okno, width=10) #Y2 interval   
+    y2.insert(0, 10)    
+    name1 = tk.Entry(okno, width=10) #graph title
+    name1.insert(0, "Graph")
+    name2 = tk.Entry(okno, width=10) #OX label
+    name2.insert(0, "X Axis")
+    name3 = tk.Entry(okno, width=10) #OY label
+    name3.insert(0, 'Y Axis')
 
 def wylacz():
     """Shuts down the program"""
