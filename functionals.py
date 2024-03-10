@@ -70,6 +70,8 @@ def ReadAndDraw(input, r1, r2, y1, y2, name1, name2, name3):
             print("Bad range!\n")
             import GraphDraw
             GraphDraw.okienko(input, r1, r2, y1, y2, name1, name2, name3)
+    else:
+        print("Not a number!\n")
             
         plt.plot(args, func)
         #plt.legend(loc="upper left")
