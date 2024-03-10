@@ -68,8 +68,8 @@ def ReadAndDraw(input, r1, r2, y1, y2, name1, name2, name3):
             rangeY1, rangeY2, args, func = CalculateInput(r1, r2, y1, y2, wzor)
         else:
             print("Bad range!\n")
-            import main
-            main.okienko(input, r1, r2, y1, y2, name1, name2, name3)
+            import GraphDraw
+            GraphDraw.okienko(input, r1, r2, y1, y2, name1, name2, name3)
             
         plt.plot(args, func)
         #plt.legend(loc="upper left")
